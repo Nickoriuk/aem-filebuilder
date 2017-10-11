@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          jcr:primaryType="nt:unstructured" jcr:title="My Dialog"
+          sling:resourceType="cq/gui/components/authoring/dialog">
+    <content jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/container">
+        <layout jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+        <items jcr:primaryType="nt:unstructured">
+            <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <title emptyText="Enter a title" fieldLabel="Title" jcr:primaryType="nt:unstructured"
+                           maxlength="100" name="./jcr:title" required="true"
+                           sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                    <navTitle
+                            fieldDescription="The title to be used in the the global nav when referring to this content"
+                            fieldLabel="Navigation Title" jcr:primaryType="nt:unstructured" maxlength="30"
+                            name="./navTitle"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>
