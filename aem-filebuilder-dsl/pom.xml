@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>io.redcastle</groupId>
-            <artifactId>aem-model</artifactId>
+            <artifactId>aem-filebuilder-model</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

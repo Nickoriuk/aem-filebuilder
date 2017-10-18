@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Nested DSL Dialog"
+          sling:resourceType="cq/gui/components/authoring/dialog">
+    <content jcr:primaryType="nt:unstructured"
+             sling:resourceType="granite/ui/components/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <column jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <first jcr:primaryType="nt:unstructured"
+                           jcr:title="Fieldset 1"
+                           sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                        <items jcr:primaryType="nt:unstructured">
+                            <text fieldLabel="Text 1"
+                                  jcr:primaryType="nt:unstructured"
+                                  name="./text"
+                                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                        </items>
+                    </first>
+                    <second jcr:primaryType="nt:unstructured"
+                            jcr:title="Fieldset 2"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                        <items jcr:primaryType="nt:unstructured">
+                            <text fieldLabel="Text 2"
+                                  jcr:primaryType="nt:unstructured"
+                                  name="./text2"
+                                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                            <select fieldLabel="My Select"
+                                    jcr:primaryType="nt:unstructured"
+                                    name="./select"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <first jcr:primaryType="nt:unstructured" text="First Option" value="1"/>
+                                    <second jcr:primaryType="nt:unstructured" text="Second Option" value="2"/>
+                                </items>
+                            </select>
+                        </items>
+                    </second>
+                </items>
+            </column>
+        </items>
+        <layout jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+    </content>
+</jcr:root>

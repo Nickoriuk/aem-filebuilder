@@ -4,10 +4,7 @@ import io.redcastle.aem.filebuilder.model.dialog.Dialog
 import io.redcastle.aem.filebuilder.model.dialog.FormFieldContainer
 import io.redcastle.aem.filebuilder.model.dialog.Layout
 import io.redcastle.aem.filebuilder.model.dialog.StandardLayouts
-import io.redcastle.aem.filebuilder.model.dialog.field.Checkbox
-import io.redcastle.aem.filebuilder.model.dialog.field.FieldSet
-import io.redcastle.aem.filebuilder.model.dialog.field.Section
-import io.redcastle.aem.filebuilder.model.dialog.field.TextField
+import io.redcastle.aem.filebuilder.model.dialog.field.*
 
 
 /**
@@ -69,4 +66,27 @@ inline fun FormFieldContainer.checkbox(nodeName: String, fieldName: String, init
 inline fun FormFieldContainer.section(nodeName: String, init: Section.() -> Unit) {
     val field = Section(nodeName).also(init)
     addField(field)
+}
+
+/**
+ * Creates a new select, and adds it to the container after initialization.
+ *
+ * @param [nodeName] the name of the select node in the JCR
+ * @param [init] function to initialize the select
+ */
+inline fun FormFieldContainer.select(nodeName: String, fieldName: String, init: Select.() -> Unit) {
+    val node = Select(nodeName, fieldName)
+    node.init()
+    addField(node)
+}
+
+/**
+ * Defines a static option on a select (drop down).
+ * @param [nodeName] The name of the option in the JCR - this must be unique among all the available options.
+ * @param [init] an initialization function
+ */
+inline fun Select.option(nodeName: String, init: Select.SelectItem.() -> Unit) {
+    val node = Select.SelectItem(nodeName)
+    node.init()
+    options.add(node)
 }
