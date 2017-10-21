@@ -69,6 +69,20 @@ inline fun FormFieldContainer.section(nodeName: String, init: Section.() -> Unit
 }
 
 /**
+ * Creates a new multifield and adds it to the form field container. A multifield is also a FormFieldContainer, and
+ * as a result can contain other fields.
+ *
+ * @param [nodeName] the name of the multifield root node in the JCR
+ * @param [fieldName] the name of the form property name in the JCR
+ * @param [init] function to initialize the multifield
+ */
+inline fun FormFieldContainer.multifield(nodeName: String, fieldName: String, init: Multifield.() -> Unit) {
+    val node = Multifield(nodeName, fieldName)
+    node.init()
+    addField(node)
+}
+
+/**
  * Creates a new select, and adds it to the container after initialization.
  *
  * @param [nodeName] the name of the select node in the JCR
