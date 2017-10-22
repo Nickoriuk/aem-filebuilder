@@ -83,6 +83,27 @@ inline fun FormFieldContainer.multifield(nodeName: String, fieldName: String, in
 }
 
 /**
+ * Creates a hidden input on the dialog.
+ * @param [nodeName] the name of the hidden field node in the JCR
+ * @param [fieldName] the form property name in the JCR
+ * @param [init] function to initialize the hidden field's attributes.
+ */
+inline fun FormFieldContainer.hidden(nodeName: String, fieldName: String, init: HiddenField.() -> Unit) {
+    val node = HiddenField(nodeName, fieldName)
+    node.init()
+    addField(node)
+}
+
+/**
+ * Shortcut for creating a hidden field with only a customized value.
+ */
+fun FormFieldContainer.hidden(nodeName: String, fieldName: String, value: String) {
+    hidden(nodeName, fieldName) {
+        this.value = value
+    }
+}
+
+/**
  * Creates a new select, and adds it to the container after initialization.
  *
  * @param [nodeName] the name of the select node in the JCR
