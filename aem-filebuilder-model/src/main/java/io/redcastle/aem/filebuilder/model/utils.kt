@@ -7,8 +7,8 @@ import io.redcastle.aem.filebuilder.model.impl.NodeImpl
 /*
  * Generic method to support other types
  */
-private fun vaultArray(type: String, values: List<Any>): String {
-    return values.joinToString(prefix = "{$type}[", separator = ",", postfix = "]")
+internal fun array(type: JcrPropertyType, values: List<Any>): String {
+    return values.joinToString(prefix = "{${type.jcrName}}[", separator = ",", postfix = "]")
 }
 
 /**
@@ -23,4 +23,22 @@ internal fun Node.attachNewChild(name: String, resourceType: String?) : Node {
     }
     children += newChildNode
     return newChildNode
+}
+interface JcrPropertyType {
+    val jcrName: String
+}
+enum class JcrPropertyTypes(override val jcrName: String) : JcrPropertyType {
+    STRING("String"),
+    BINARY("Binary"),
+    LONG("Long"),
+    DOUBLE("Double"),
+    DECIMAL("Decimal"),
+    DATE("Date"),
+    BOOLEAN("Boolean"),
+    NAME("Name"),
+    PATH("Path"),
+    REFERENCE("Reference"),
+    WEAKREFERENCE("WeakReference"),
+    URI("URI"),
+    UNDEFINED("undefined")
 }

@@ -16,5 +16,6 @@
     <modules>
         <module>aem-filebuilder-model</module>
         <module>aem-filebuilder-dsl</module>
+        <module>samples</module>
     </modules>
 </project>

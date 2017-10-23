@@ -120,6 +120,8 @@ This makes a dialog such as the following:
 
 ![image of dialog](docs/readme-dialog-example.png)
 
+More samples can be found [here](samples/ui.apps/src/main/content/jcr_root/apps/aem-filebuilder/components).
+
 ### Artifacts
 
 This repository is not on Maven Central or Bintray yet - it will be added when the project is less experimental.

@@ -34,3 +34,9 @@ internal fun xmlDiffFormatter(xmlDifference: Diff): () -> String {
         xmlDifference.differences.joinToString(separator = "\n") { it.toString(DefaultComparisonFormatter()) }
     }
 }
+
+inline internal fun testNodeEqualsXml(resourcePath: String, nodeSupplier: () -> Node) {
+    val stream = getTestResource(resourcePath)
+    val xmlDifference = getDifference(stream, nodeSupplier())
+    assert(!xmlDifference.hasDifferences(), xmlDiffFormatter(xmlDifference))
+}
