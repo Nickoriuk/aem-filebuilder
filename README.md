@@ -1,9 +1,8 @@
 # AEM Filebuilder
 
 ### Introduction
-This library helps build dialogs for AEM by providing a DSL to build a dialog model that can be compiled into XML 
-during your project's compilation. Currently Maven is supported due to being the standard for AEM projects, but a 
-Javascript-based version may come in the future for those who pre-process their AEM code with Node.js or similar.
+This library helps build dialogs for AEM by providing a DSL to build a dialog model that can be transformed into XML 
+during your project's compilation.
 
 
 #### Why?
@@ -13,24 +12,19 @@ to solve that by introducing a natural DSL which is easy to read and write. It a
 
 * Refer to your AEM bundle's constants directly in the Dialog DSL - ensure your dialog and Java classes are always 
   dealing with the same property name
-* Share snippets of dialog code between different components
+* Share snippets of dialog code between different components using a shared DSL module
 * Provides a simple, extensible API so you can develop your own DSL functions and types.
 * Interoperable - use side by side with standard XML files
+* Less error prone - statically typed DSL helps enforce correct dialog definitions.
 
-The library will also allow you to force code quality standards. For example, you could create your own text field DSL 
-function called `myTextField()` that requires  a field label which is between 4 and 25 characters and a non-empty 
-field description in order for the build to succeed.
-
+This project currently only supports AEM 6.3 and higher.
 
 ### Quick Example
 Example of a simple _cq_dialog.xml file written in Kotlin:
 
 **apps/project/components/example/_cq_dialog.xml.kts**
 ```kotlin
-import io.redcastle.aem.filebuilder.dsl.checkbox
-import io.redcastle.aem.filebuilder.dsl.dialog
-import io.redcastle.aem.filebuilder.dsl.section
-import io.redcastle.aem.filebuilder.dsl.textField
+import io.redcastle.aem.filebuilder.dsl.*
 import io.redcastle.aem.filebuilder.model.dialog.field.Checkbox
 
 dialog("My Dialog") {
@@ -62,61 +56,7 @@ dialog("My Dialog") {
 
 ```
 
-The above code creates the following output after `mvn clean install` runs:
-
-**apps/project/components/example/_cq_dialog.xml**
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
-          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
-          jcr:primaryType="nt:unstructured" jcr:title="My Dialog"
-          sling:resourceType="cq/gui/components/authoring/dialog">
-    <content jcr:primaryType="nt:unstructured" 
-             sling:resourceType="granite/ui/components/foundation/container">
-        <layout jcr:primaryType="nt:unstructured" 
-                sling:resourceType="granite/ui/components/foundation/layouts/tabs"
-                type="nav"/>
-        <items jcr:primaryType="nt:unstructured">
-            <section1 jcr:primaryType="nt:unstructured" 
-                      jcr:title="My Section"
-                      sling:resourceType="granite/ui/components/foundation/section">
-                <items jcr:primaryType="nt:unstructured">
-                    <column jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/container">
-                        <items jcr:primaryType="nt:unstructured">
-                            <title emptyText="Enter a title" 
-                                   fieldLabel="Title" 
-                                   jcr:primaryType="nt:unstructured"
-                                   maxlength="100" 
-                                   name="./jcr:title" 
-                                   required="true"
-                                   sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
-                            <navTitle
-                                    fieldDescription="The title to be used in the the global nav when referring to this content"
-                                    fieldLabel="Navigation Title" 
-                                    jcr:primaryType="nt:unstructured" 
-                                    maxlength="30"
-                                    name="./navTitle"
-                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
-                            <showInNav fieldDescription="If checked, the title will be displayed in the navigation"
-                                       jcr:primaryType="nt:unstructured" 
-                                       name="./showInNav"
-                                       sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
-                                       text="Show In Nav" 
-                                       toolTipPosition="right" 
-                                       value="{Boolean}true"/>
-                        </items>
-                    </column>
-                </items>
-                <layout jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
-            </section1>
-        </items>
-    </content>
-</jcr:root>
-```
-
-This makes a dialog such as the following:
+The above code creates the following dialog:
 
 ![image of dialog](docs/readme-dialog-example.png)
 
