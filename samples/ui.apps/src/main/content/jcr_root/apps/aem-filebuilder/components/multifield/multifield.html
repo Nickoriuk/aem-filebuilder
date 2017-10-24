@@ -1,0 +1,11 @@
+<div>Multifield example using composite value storage.
+    <sly data-sly-list.root="${resource.children}">
+        <ul data-sly-list.child="${root.children}">
+            <li>
+                <a href="${child.valueMap.href}">
+                    ${child.valueMap['jcr:title']}
+                </a>
+            </li>
+        </ul>
+    </sly>
+</div>

@@ -26,7 +26,7 @@ class Multifield(nodeName: String, formName: String) : Node by NodeImpl(nodeName
      * multifield. More more information on this, see the Adobe documentation linked in the class documentation for
      * this type.
      */
-    var compose: Boolean by propertyDelegate()
+    var composite: Boolean by propertyDelegate()
     var deleteHint: Boolean by propertyDelegate()
     var typeHint: String by propertyDelegate()
     var required: Boolean by propertyDelegate()
