@@ -16,6 +16,16 @@ internal fun array(type: JcrPropertyType, values: List<Any>): String {
  */
 internal fun Node.attachNewChild(name: String): Node = attachNewChild(name, null)
 
+internal fun Node.items() : Node {
+    val items: Node? = getChildByName("items")
+    return if (items != null) items else attachNewChild("items")
+}
+
+// TODO: Look at replacing List<Node> children with Map<String, Node> children
+// For now move the logic of get child by name into this method to make refactor-friendly
+internal fun Node.getChildByName(name: String): Node? = children.firstOrNull { it.name == name }
+
+
 internal fun Node.attachNewChild(name: String, resourceType: String?) : Node {
     val newChildNode = NodeImpl(name)
     if (resourceType != null) {

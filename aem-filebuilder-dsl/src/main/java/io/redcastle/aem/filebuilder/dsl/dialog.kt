@@ -125,3 +125,26 @@ inline fun Select.option(nodeName: String, init: Select.SelectItem.() -> Unit) {
     node.init()
     options.add(node)
 }
+
+/**
+ * Creates a new ColorField, and adds it to the container after initialization.
+ *
+ * @param [nodeName] the name of the color field node in the JCR
+ * @param [init] function to initialize the select
+ */
+inline fun FormFieldContainer.colorField(nodeName: String, fieldName: String, init: ColorField.() -> Unit) {
+    val node = ColorField(nodeName, fieldName)
+    node.init()
+    addField(node)
+}
+
+/**
+ * Defines a static option on a ColorField
+ * @param [nodeName] The name of the option in the JCR - this must be unique among all the available options.
+ * @param [init] an initialization function
+ */
+inline fun ColorField.color(nodeName: String, init: ColorField.ColorFieldItem.() -> Unit) {
+    val node = ColorField.ColorFieldItem(nodeName)
+    node.init()
+    options.add(node)
+}

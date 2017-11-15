@@ -3,6 +3,7 @@ package io.redcastle.aem.filebuilder.model.dialog.field
 import io.redcastle.aem.filebuilder.model.propertyDelegate
 import io.redcastle.aem.filebuilder.model.api.Node
 import io.redcastle.aem.filebuilder.model.impl.NodeImpl
+import io.redcastle.aem.filebuilder.model.items
 
 /**
  * @param nodeName The name of the node as stored in the JCR.
@@ -12,12 +13,6 @@ class Select(
         val nodeName: String,
         val formName: String
 ) : DialogField(nodeName, formName, RESOURCE_TYPE) {
-
-    private val optionsRoot: Node = NodeImpl("items")
-
-    init {
-        children.add(optionsRoot)
-    }
 
     var fieldLabel: String by propertyDelegate()
     var emptyText: String? by propertyDelegate()
@@ -30,7 +25,7 @@ class Select(
     var emptyOption: Boolean? by propertyDelegate()
     var variant: String? by propertyDelegate()
     var deleteHint: Boolean? by propertyDelegate()
-    val options: MutableList<SelectItem> get() = optionsRoot.children as MutableList<SelectItem>
+    val options: MutableList<SelectItem> get() = items().children as MutableList<SelectItem>
 
     class SelectItem(nodeName: String): Node by NodeImpl(nodeName) {
         var value: String? by propertyDelegate()
